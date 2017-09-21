@@ -1,0 +1,136 @@
+﻿<head>
+	<style>
+		body {
+		  background-color: #333333;
+		  font-family: "Open Sans", Helvetica;
+		}
+
+		form {
+		  text-align: center;
+		}
+
+		label {
+		  display: block;
+		  letter-spacing: 4px;
+		  padding-top: 30px;
+		  text-align: center;
+		}
+		label .label-text {
+		  color: #9B9B9B;
+		  cursor: text;
+		  font-size: 20px;
+		  line-height: 20px;
+		  text-transform: uppercase;
+		  -moz-transform: translateY(-34px);
+		  -ms-transform: translateY(-34px);
+		  -webkit-transform: translateY(-34px);
+		  transform: translateY(-34px);
+		  transition: all 0.3s;
+		}
+		label input {
+		  background-color: transparent;
+		  border: 0;
+		  border-bottom: 2px solid #4A4A4A;
+		  color: white;
+		  font-size: 36px;
+		  letter-spacing: -1px;
+		  outline: 0;
+		  padding: 5px 20px;
+		  text-align: center;
+		  transition: all 0.3s;
+		  width: 200px;
+		}
+		label input:focus {
+		  max-width: 100%;
+		  width: 400px;
+		}
+		label input:focus + .label-text {
+		  color: #F0F0F0;
+		  font-size: 13px;
+		  -moz-transform: translateY(-74px);
+		  -ms-transform: translateY(-74px);
+		  -webkit-transform: translateY(-74px);
+		  transform: translateY(-74px);
+		}
+		label input:valid + .label-text {
+		  font-size: 13px;
+		  -moz-transform: translateY(-74px);
+		  -ms-transform: translateY(-74px);
+		  -webkit-transform: translateY(-74px);
+		  transform: translateY(-74px);
+		}
+
+		button {
+		  background-color: #333333;
+		  border: 2px solid white;
+		  border-radius: 27px;
+		  color: white;
+		  cursor: pointer;
+		  font-size: 20px;
+		  margin-top: 20px;
+		  padding: 15px 30px;
+		  text-transform: uppercase;
+		  transition: all 200ms;
+		}
+		button:hover, button:focus {
+		  background-color: white;
+		  color: #333333;
+		  outline: 0;
+		}
+	</style>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<form>
+		<label>
+			<input id="ref" type="text" value="1" required />
+			<div class="label-text">Реферат</div>
+		</label>
+		<label>
+			<input id="sam" type="text" value="1" required />
+			<div class="label-text">СР</div>
+		</label>
+		<label>
+			<input id="dz" type="text" value="1" required />
+			<div class="label-text">ДЗ</div>
+		</label>
+		<label>
+			<input id="aud" type="text" value="1" required />
+			<div class="label-text">Аудиторная работа</div>
+		</label>
+		<label>
+			<input id="prj" type="text" value="1" required />
+			<div class="label-text">Проект</div>
+		</label>
+	</form>
+	<label>
+		<div class="label-text" style="display:inline; margin-top: 80px; font-size: 15pt!important;">Итог </div>
+		<div class="label-text" style="display:inline; margin-top: 80px; font-size: 30pt!important;" id="result">3.50</div>
+	</label>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $('#sam,#aud,#ref,#dz,#prj').on('keyup',Update);
+		    Update();
+		});
+
+		function Update(){
+			var prj = parseInt($("#prj").val());
+
+			var sam= parseInt($("#sam").val());
+			var aud= parseInt($("#aud").val());
+			var ref = parseInt($("#ref").val());
+			var dz = parseInt($("#dz").val());
+
+			var tek = 0.6*ref + 0.4*dz;
+			var nakop = 0.6*tek + 0.2*aud + 0.2*sam;
+			var result = nakop*0.6+prj*0.4;
+			$("#result").text((Math.round(result*100)/100).toString());
+		}
+
+	</script>
+</body>
